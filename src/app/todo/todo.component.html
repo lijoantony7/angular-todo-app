@@ -1,0 +1,35 @@
+<div class="d-flex align-items-center">
+  <!-- BOTH WAYS OF BINDING -->
+  <input type="text" class="form-control flex-grow-1 me-2" placeholder="Enter your todo text"
+    [(ngModel)]="newTodo.name" />
+  <!-- BOTH WAYS OF BINDING: Two-way data binding with ngModel actual way behind the scenes is to use property binding and event binding together.
+<input [ngModel]="newTodos" (ngModelChange)="newTodos = $event"> -->
+
+  <!-- PROPERTY BINDING: From Component to Template -->
+  <!-- <input type="text" class="form-control flex-grow-1 me-2" placeholder="Enter your todo text"
+(change)="newTodo($event)" /> -->
+
+  <!-- EVENT BINDING: From Template to Component -->
+  <!-- <input type="text" class="form-control flex-grow-1 me-2" placeholder="Enter your todo text"
+[value]="newTodo123()" /> -->
+
+  <button class="btn btn-primary" (click)="addTodo()">Add</button>
+</div>
+<ul class="list-group mt-3">
+  <li *ngFor="let todo of todoList; let i = index"
+    class="list-group-item d-flex justify-content-between align-items-center">
+    <span [ngClass]="{'text-decoration-line-through text-success': todo.done}">
+      {{ todo.name }}
+    </span>
+    <div class="d-flex">
+      <button class="btn border" [ngClass]="todo.done ? 'btn-danger' : 'btn-success'" (click)="toggleDone(i)">
+        {{ todo.done ? 'Undo' : 'Done' }}
+      </button>
+      <button class="btn btn-primary border" (click)="showModel(todo.id)">Details</button>
+      <button class="btn btn-danger border ms-2" (click)="makeItDelete(i)">Delete</button>
+    </div>
+  </li>
+</ul>
+
+<!-- Render modal if flag is true -->
+<app-todo-details *ngIf="isModelOpen" (todo)="todo" (closed)="handleModalClose()" [todo]="todoData"></app-todo-details>

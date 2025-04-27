@@ -1,0 +1,26 @@
+<div class="backdrop">
+  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{todo.name}}</h5>
+        <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <div class="col-6 font-weight-bold">Created Date:</div>
+          <div class="col-6">{{ todo.createdTime }}</div>
+        </div>
+        <div class="row">
+          <div class="col-6 font-weight-bold">Is it Done?</div>
+          <div class="col-6">
+            <span *ngIf="todo.done; else notDone" class="text-success">Yes</span>
+            <ng-template #notDone><span class="text-danger">No</span></ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
