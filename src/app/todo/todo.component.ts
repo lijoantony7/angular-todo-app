@@ -30,6 +30,7 @@ export class TodoComponent {
   currentTodoIndex: number = 0;
   todoData: any = {};
 
+
   addTodo() {
     if (this.newTodo) {
       let length = this.todoList.length + 1;
